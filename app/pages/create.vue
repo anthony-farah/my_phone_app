@@ -11,7 +11,7 @@
        <textField v-model="passwordInput" hint="Create Password" secure="true" class="form-input" />
     </FlexboxLayout>
 
-<Button text="Create Account" @tap="onButtonTap" class="my-button" />
+<Button text="Create Account" @tap="handleCreate" class="my-button" />
 
 <FlexboxLayout alignItems="center" justifyContent="space-between" class="auth-buttons">
     <Button horizontalAlignment="left" text="Already have Account" @tap="goTologin"/>
@@ -24,10 +24,11 @@
 </template>
 
 <script lang="ts">
-  import Vue from "nativescript-vue";
-  import login from '../pages/login.vue';
-  import create from '../pages/create.vue';
-
+    import Vue from "nativescript-vue";
+    import login from '../pages/login.vue';
+    import create from '../pages/create.vue';
+    import chome from '../pages/chome.vue';
+    import {mapActions} from 'vuex'
 
   export default Vue.extend({
     data(){
@@ -41,11 +42,24 @@
       }
     },
     methods: {
+        ...mapActions(['createUser']),
         goTologin() {
             this.$navigateTo(login)
         },
         goTocreate() {
             this.$navigateTo(create)
+        },
+        goTochome() {
+            this.$navigateTo(chome)
+        },
+        handleCreate() {
+            if(this.usernameInput.length > 5 && this.passwordInput.length > 5){
+                console.log('got into handle create')
+                this.createUser({
+                    name:this.usernameInput,
+                    password:this.passwordInput
+                }) && this.goTochome()
+            }
         }
     },
     watch: {

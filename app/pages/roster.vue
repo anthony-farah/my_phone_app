@@ -10,20 +10,20 @@
       marginTop="10"
       marginBottom="5"
     />
-    <ListView class="images" items="" for="character in characters">
+    <ListView class="images" items="" for="character in activeUser.roster">
       <v-template>
         <StackLayout backgroundColor="#f0e14a" class="images__item-wrapper">
           <Image :src="character.image" class="images__item-image" />
           <Label :text="character.name" class="images__item-name" />
           <StackLayout fontSize="15" marginLeft="10" marginTop="8">
             <Label marginBottom="2" >
-              <Span text="Gender: " /> <Span :text="character.gender" />
+              <Span text="Gender: " /> <Span :text="character.name" />
             </Label>
             <Label marginBottom="2">
-              <Span text="Status: " /> <Span :text="character.status" />
+              <Span text="Status: " /> <Span :text="character.health" />
             </Label>
             <Label>
-              <Span text="Specie: " /> <Span :text="character.species" />
+              <Span text="Specie: " /> <Span :text="character.defense" />
             </Label>
           </StackLayout>
         </StackLayout>
@@ -39,6 +39,7 @@
   import login from '../pages/login.vue';
   import create from '../pages/create.vue';
   import roster from '../pages/roster.vue';
+  import {mapState} from 'vuex';
   
 
 
@@ -54,6 +55,7 @@
       }
     },
     methods: {
+        ...mapState(['activeUser']),
         goTologin() {
             this.$navigateTo(login)
         },

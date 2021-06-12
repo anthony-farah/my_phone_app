@@ -13,6 +13,10 @@
 <Button text="Roster" @tap="goToroster" class="my-button" />
 </FlexboxLayout>
 
+<FlexboxLayout alignItems="center" width="117.50" height="70" class="border-bottom">
+<Button text="Shop" @tap="goToShop" class="my-button" />
+</FlexboxLayout>
+
 
 </StackLayout>
 </FlexboxLayout>

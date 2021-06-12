@@ -44,9 +44,6 @@
     },
     methods: {
         ...mapActions(['login']),
-        goTologin() {
-            this.$navigateTo(login)
-        },
         goTocreate() {
             this.$navigateTo(create)
         },
@@ -55,16 +52,20 @@
         },
         handleLogin() {
             if(this.usernameInput.length > 5 && this.passwordInput.length > 5){
+                console.log('got into handle login')
                 this.login({
                     name:this.usernameInput,
                     password:this.passwordInput
-                })
+                }) && this.goTochome()
             }
         }
     },
     watch: {
       characterName(){
         console.log('character name changed')
+      },
+      passwordInput(){
+          console.log(this.passwordInput)
       }
     },
     computed: {

@@ -12,7 +12,19 @@ Vue.use(VueX)
 const appStore = new VueX.Store({
   state: {
     database:{
-      users:[]
+      users:[{
+        name:'herbert',
+        username:'herb123',
+        password:'123456',
+        gold:10,
+        roster:[{
+          cname:'Boggert',
+            attacks:[],
+            defense:5,
+            strength:7,
+            health:50
+        }]
+      }]
     },
     activeUser:{
       name:'',
@@ -22,32 +34,54 @@ const appStore = new VueX.Store({
     }
   },
   actions:{
-    createUser({state},input){
-      // state.activeUser.map()
-      // }
-
+    createUser({state, commit},input){
+      const user = state.database.users.find((user)=>{
+        console.log('looking for users')
+        return ( user.username === input.name &&
+        user.password === input.password )
+      })
+      if(!user){
+        console.log('we are in the clear no user found')
+        const newUser = {
+          name:'herbert',
+          username:input.name,
+          password:input.password,
+          gold:0,
+          roster:[{
+            cname:'Boggert',
+              attacks:[],
+              defense:5,
+              strength:7,
+              health:50
+          }]
+        }
+        commit('setUserToDataBase',newUser)
+        commit('setActiveUser',newUser)
+      }
     },
     
     login({state, commit},input){
-      try {
-        if(!input.name) throw 'STOP'
-      } catch(e){
-
-      }
-      const user = state.database.users.find((user)=>{
-        return ( user.name === input.name &&
-        user.password === input.password )
-      })
-      if(user) commit('setActiveUser',user)
+      console.log('I am inside of login')
+        const user = state.database.users.find((user)=>{
+          console.log('looking for users')
+          return ( user.username === input.name &&
+          user.password === input.password )
+        })
+        if(user){
+          console.log('I am a user')
+          commit('setActiveUser',user)
+          return true
+        }
+        return false
     }
   },
   mutations: {
     setActiveUser(state,input){
+      console.log('setting an active user',input)
       state.activeUser = input
     },
-    setUserToDataBase(state){
-      // state.database.users++
-      // }
+    setUserToDataBase(state,input){
+      state.database.users.push(input)
     },
 
     // decreaseWeapons(state) {
