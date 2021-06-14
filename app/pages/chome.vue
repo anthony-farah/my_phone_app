@@ -1,21 +1,22 @@
 <template>
   <Page>
-<FlexboxLayout flexDirection="column" justifyContent="center" class="full-height">
+      <ActionBar backgroundColor="black" class="action-bar" />
+<FlexboxLayout backgroundColor="black" flexDirection="column" justifyContent="center" class="full-height">
 <Image src="../assets/images/defaultcharacter.png" class="logo-container" />
 <StackLayout class="container">
 
 
-<FlexboxLayout alignItems="center" width="95" height="70" class="border-bottom">
-<Button text="Fight" class="my-button" /> 
-</FlexboxLayout>
 
-<FlexboxLayout alignItems="center" width="117.50" height="70" class="border-bottom">
-<Button text="Roster" @tap="goToroster" class="my-button" />
-</FlexboxLayout>
+<Button text="Fight" class="my-button" backgroundColor="rgb(224, 0, 0)"/> 
 
-<FlexboxLayout alignItems="center" width="117.50" height="70" class="border-bottom">
-<Button text="Shop" @tap="goToShop" class="my-button" />
-</FlexboxLayout>
+
+
+<Button text="Roster" @tap="goToroster" class="my-button" backgroundColor="rgb(224, 0, 0)"/>
+
+
+
+<Button text="Shop" @tap="goToShop" class="my-button" backgroundColor="rgb(224, 0, 0)"/>
+
 
 
 </StackLayout>

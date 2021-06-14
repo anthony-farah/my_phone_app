@@ -1,35 +1,28 @@
 <template>
 <Page>
-  <StackLayout backgroundColor="#dce2e9" class="">
-    <Label
+    <ActionBar title="Choose Characters" fontFamily="Fantasy, Papyrus" color="rgb(224, 0, 0)"  backgroundColor="black" class="action-bar" />
+
+    <ScrollView backgroundColor="black">
+        <Label
       text="Top Characters"
-      color="black"
+      fontFamily="Fantasy, Papyrus"
+      color="rgb(224, 0, 0)"
       fontWeight="bold"
       textAlignment="center"
       fontSize="30"
       marginTop="10"
       marginBottom="5"
     />
-    <ListView class="images" items="" for="character in activeUser.roster">
-      <v-template>
-        <StackLayout backgroundColor="#f0e14a" class="images__item-wrapper">
-          <Image :src="character.image" class="images__item-image" />
-          <Label :text="character.name" class="images__item-name" />
-          <StackLayout fontSize="15" marginLeft="10" marginTop="8">
-            <Label marginBottom="2" >
-              <Span text="Gender: " /> <Span :text="character.name" />
-            </Label>
-            <Label marginBottom="2">
-              <Span text="Status: " /> <Span :text="character.health" />
-            </Label>
-            <Label>
-              <Span text="Specie: " /> <Span :text="character.defense" />
-            </Label>
-          </StackLayout>
-        </StackLayout>
-      </v-template>
-    </ListView>
-  </StackLayout>
+			<ListView for="item in items" class="list-group" @itemTap="onItemTap">
+				<v-template>
+					<GridLayout class="list-group-item" rows="*" columns="auto, *">
+						<Image row="0" col="0" :src="item.src" width="250" height="250" />
+						<Label row="0" col="1" :text="item.text" fontWeight="bold"/>
+					</GridLayout>
+				</v-template>
+			</ListView>
+		</ScrollView>
+  
 </Page>
 </template>
 
@@ -42,18 +35,33 @@
   import {mapState} from 'vuex';
   
 
+export default {
+  data() {
+    return {
+      items: [
+        { text: "Black Dragon", src: "https://free3d.com/imgd/raw64413-black-dragon-rigged-and-game-ready-92023.jpg" },
+        { text: "White Dragon", src: "https://free3d.com/imgd/raw54327-dinodragon-1032.jpg" },
+        { text: "Red Dragon", src: "https://preview.free3d.com/img/2016/04/2279488985724093657/j2qgrxl7-900.jpg" },
+        { text: "Alien", src: "https://free3d.com/imgd/raw46/5e331c8626be8bdc188b4567/9094-alien-animal-update-in-blender-28x.png" },
+        { text: "Monkey", src: "https://free3d.com/imgd/l39/596539.jpg" }
+      ]
+   }
+  },
+ 
 
-  export default Vue.extend({
-    data(){
-      return {
-        usernameInput: '',
-        passwordInput: '',
-        loggedIn: false,
-        characterName:'',
-        health:2,
-        moves:[]
-      }
-    },
+
+
+//  export default Vue.extend({
+//    data(){
+//      return {
+//       usernameInput: '',
+//        passwordInput: '',
+//        loggedIn: false,
+//        characterName:'',
+//        health:2,
+//        moves:[]
+//      }
+//    },
     methods: {
         ...mapState(['activeUser']),
         goTologin() {
@@ -64,7 +72,10 @@
         },
         goToroster() {
             this.$navigateTo(roster)
-        }
+        },
+        onItemTap: function(event) {
+      console.log("You tapped: " + this.$data.items[event.index].text);
+    }
     },
     watch: {
       characterName(){

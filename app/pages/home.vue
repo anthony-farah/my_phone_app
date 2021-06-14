@@ -1,17 +1,18 @@
 <template>
   <Page>
-<FlexboxLayout flexDirection="column" justifyContent="center" class="full-height"> 
+<FlexboxLayout backgroundColor="black" flexDirection="column" justifyContent="center" class="full-height"> 
+<Label text="AR BRAWL" color="rgb(224, 0, 0)" fontSize="50" fontWeight="bold" class="title" />
 <StackLayout class="container">
 
 
-<FlexboxLayout alignItems="center" width="95" height="70" class="border-bottom">
-<Button text="Login" @tap="goTologin" class="my-button" /> 
-</FlexboxLayout>
 
-<FlexboxLayout alignItems="center" width="229.5" height="70" class="border-bottom">
-<Button text="Create an Account" @tap="goTocreate" class="my-button" />
-</FlexboxLayout>
+<Button text="Login" @tap="goTologin" class="my-button" backgroundColor="rgb(224, 0, 0)"/> 
 
+
+
+<Button text="Create an Account" @tap="goTocreate" class="my-button" backgroundColor="rgb(224, 0, 0)"/>
+
+<Button text="Settings" @tap="goTosettings" class="settings" backgroundColor="gray"/>
 
 </StackLayout>
 </FlexboxLayout>
@@ -24,6 +25,7 @@
   import Vue from "nativescript-vue";
   import login from '../pages/login.vue';
   import create from '../pages/create.vue';
+  import settings from '../pages/settings.vue';
 
   export default Vue.extend({
     data(){
@@ -42,6 +44,9 @@
         },
         goTocreate() {
             this.$navigateTo(create)
+        },
+        goTosettings() {
+            this.$navigateTo(settings)
         }
     },
     watch: {
@@ -66,21 +71,21 @@
   }
   .border-bottom {
       border-bottom-width: 1;
-      border-bottom-color: white;
+      border-bottom-color: black;
       margin-bottom: 40;
     padding-bottom: 8;
   }
   .my-button {
-      background-color: #4BD5DC;
-    color: white;
+    backgroundColor: rgb(103, 119, 118);
+    color: black;
     font-weight: bold;
-    border-radius: 25;
+    border-radius: 30;
     padding-top: 14;
     padding-bottom: 14;
     text-transform: uppercase;
     letter-spacing: 0.1;
-    margin-bottom: 20;
-    margin-top: 10;
+    margin-bottom: 25;
+    margin-top: 15;
   }
   .full-height {
     height: 100%;
@@ -88,5 +93,21 @@
   .container {
     margin-left: 34;
     margin-right: 34;
+  }
+  .title {
+    margin-left: 65;
+    margin-right: 34; 
+    margin-bottom: 250;
+    font-family:'Fantasy', 'Papyrus';
+  }
+  .settings {
+    font-weight: bold;
+    border-radius: 30;
+    padding-top: 14;
+    padding-bottom: 14;
+    text-transform: uppercase;
+    letter-spacing: 0.1;
+    margin-bottom: 25;
+    margin-top: 15;
   }
   </style>

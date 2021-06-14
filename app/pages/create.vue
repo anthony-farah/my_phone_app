@@ -1,21 +1,22 @@
 <template>
   <Page>
-    <FlexboxLayout flexDirection="column" justifyContent="center" class="full-height"> 
-
+    <ActionBar backgroundColor="black" class="action-bar" />
+    <FlexboxLayout backgroundColor="black" flexDirection="column" justifyContent="center" class="full-height"> 
+    <Label text="CREATE" color="rgb(224, 0, 0)" fontSize="50" fontWeight="bold" class="title" marginLeft="85" marginBottom="100"/>
     <StackLayout class="container">
-    <FlexboxLayout alignItems="center" class="border-bottom">
-       <textField v-model="usernameInput" hint="Create Username" class="form-input" />
+    <FlexboxLayout alignItems="center" backgroundColor="rgb(116, 116, 116)" class="border-bottom">
+       <textField v-model="usernameInput" backgroundColor="rgb(116, 116, 116)" hint="Create Username" class="form-input" />
     </FlexboxLayout>
 
-<FlexboxLayout alignItems="center" class="border-bottom">
-       <textField v-model="passwordInput" hint="Create Password" secure="true" class="form-input" />
+<FlexboxLayout alignItems="center" backgroundColor="rgb(116, 116, 116)" class="border-bottom">
+       <textField v-model="passwordInput" backgroundColor="rgb(116, 116, 116)" hint="Create Password" secure="true" class="form-input" />
     </FlexboxLayout>
 
-<Button text="Create Account" @tap="handleCreate" class="my-button" />
+<Button text="Create Account" @tap="handleCreate" class="my-button" backgroundColor="rgb(224, 0, 0)" />
 
 <FlexboxLayout alignItems="center" justifyContent="space-between" class="auth-buttons">
-    <Button horizontalAlignment="left" text="Already have Account" @tap="goTologin"/>
-    <Label horizontalAlignment="right" text="Forgot Password" />
+    <Button horizontalAlignment="left" backgroundColor="black" color="rgb(224, 0, 0)" text="Already have Account" @tap="goTologin"/>
+    <Label horizontalAlignment="right" backgroundColor="black" color="rgb(224, 0, 0)" text="Forgot Password" />
 </FlexboxLayout>
       </StackLayout>
 
@@ -29,6 +30,7 @@
     import create from '../pages/create.vue';
     import chome from '../pages/chome.vue';
     import {mapActions} from 'vuex'
+    import chooseteam from '../pages/chooseteam.vue';
 
   export default Vue.extend({
     data(){
@@ -52,13 +54,16 @@
         goTochome() {
             this.$navigateTo(chome)
         },
+        goTochooseteam() {
+            this.$navigateTo(chooseteam)
+        },
         handleCreate() {
             if(this.usernameInput.length > 5 && this.passwordInput.length > 5){
                 console.log('got into handle create')
                 this.createUser({
                     name:this.usernameInput,
                     password:this.passwordInput
-                }) && this.goTochome()
+                }) && this.goTochooseteam()
             }
         }
     },
@@ -127,5 +132,11 @@
   .container {
     margin-left: 34;
     margin-right: 34;
+  }
+  .title {
+    margin-left: 65;
+    margin-right: 34; 
+    margin-bottom: 250;
+    font-family:'Fantasy', 'Papyrus';
   }
 </style>

@@ -1,21 +1,23 @@
 <template>
   <Page>
-    <FlexboxLayout flexDirection="column" justifyContent="center" class="full-height"> 
-
+    <ActionBar backgroundColor="black" />
+    <FlexboxLayout backgroundColor="black" flexDirection="column" justifyContent="center" class="full-height"> 
+        <Label text="LOGIN" color="rgb(224, 0, 0)" fontSize="50" fontWeight="bold" class="title" marginLeft="110" marginBottom="100" />
     <StackLayout class="container">
-    <FlexboxLayout alignItems="center" class="border-bottom">
-       <textField v-model="usernameInput" hint="Username" class="form-input" />
+
+    <FlexboxLayout alignItems="center" backgroundColor="rgb(116, 116, 116)" class="border-bottom">
+       <textField v-model="usernameInput" backgroundColor="rgb(116, 116, 116)" color="white" hint="Username" class="form-input" />
     </FlexboxLayout>
 
-<FlexboxLayout alignItems="center" class="border-bottom">
-       <textField v-model="passwordInput" hint="Password" secure="true" class="form-input" />
+<FlexboxLayout alignItems="center" backgroundColor="rgb(116, 116, 116)" class="border-bottom">
+       <textField v-model="passwordInput" backgroundColor="rgb(116, 116, 116)" color="white" hint="Password" secure="true" class="form-input" />
     </FlexboxLayout>
 
-<Button text="Login" @tap="handleLogin" class="my-button" />
+<Button text="Login" @tap="handleLogin" class="my-button" backgroundColor="rgb(224, 0, 0)"/>
 
 <FlexboxLayout alignItems="center" justifyContent="space-between" class="auth-buttons">
-    <Button horizontalAlignment="left" text="Create Account" @tap="goTocreate"/>
-    <Label horizontalAlignment="right" text="Forgot Password" />
+    <Button horizontalAlignment="left" backgroundColor="black" color="rgb(224, 0, 0)" text="Create Account" @tap="goTocreate"/>
+    <Label horizontalAlignment="right" backgroundColor="black" color="rgb(224, 0, 0)" text="Forgot Password" />
 </FlexboxLayout>
       </StackLayout>
 
@@ -56,7 +58,7 @@
                 this.login({
                     name:this.usernameInput,
                     password:this.passwordInput
-                }) && this.goTochome()
+                }) && this.goTochooseteam()
             }
         }
     },
@@ -84,11 +86,6 @@
     @include colorize($color: accent);
   }
 
-  .info {
-    font-size: 20;
-    horizontal-align: center;
-    vertical-align: center;
-  }
   .border-bottom {
       border-bottom-width: 1;
       border-bottom-color: white;
@@ -114,10 +111,6 @@
     margin-bottom: 20;
     margin-top: 10;
   }
-  .auth-buttons {
-    color: white;
-    font-size: 14;
-  }
   .full-height {
     height: 100%;
   }
@@ -128,5 +121,10 @@
   .container {
     margin-left: 34;
     margin-right: 34;
+  }
+  .title {
+    margin-left: 64;
+    margin-right: 34;
+    font-family:'Fantasy', 'Papyrus';
   }
 </style>
