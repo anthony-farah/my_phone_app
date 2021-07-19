@@ -1,19 +1,9 @@
 <template>
 <Page>
-    <ActionBar title="Choose Characters" fontFamily="Fantasy, Papyrus" color="rgb(224, 0, 0)"  backgroundColor="black" class="action-bar" />
+    <ActionBar title="Choose Characters" fontFamily="Fantasy, Papyrus"  backgroundColor="black" class="action-bar" />
 
     <ScrollView backgroundColor="black">
-        <Label
-      text="Top Characters"
-      fontFamily="Fantasy, Papyrus"
-      color="rgb(224, 0, 0)"
-      fontWeight="bold"
-      textAlignment="center"
-      fontSize="30"
-      marginTop="10"
-      marginBottom="5"
-    />
-			<ListView for="item in items" class="list-group" @itemTap="onItemTap">
+			<ListView for="item in rosterList" class="list-group" @itemTap="onItemTap">
 				<v-template>
 					<GridLayout class="list-group-item" rows="*" columns="auto, *">
 						<Image row="0" col="0" :src="item.src" width="250" height="250" />
@@ -28,7 +18,6 @@
 
 
 <script lang="ts">
-  import Vue from "nativescript-vue";
   import login from '../pages/login.vue';
   import create from '../pages/create.vue';
   import roster from '../pages/roster.vue';
@@ -47,23 +36,8 @@ export default {
       ]
    }
   },
- 
-
-
-
-//  export default Vue.extend({
-//    data(){
-//      return {
-//       usernameInput: '',
-//        passwordInput: '',
-//        loggedIn: false,
-//        characterName:'',
-//        health:2,
-//        moves:[]
-//      }
-//    },
     methods: {
-        ...mapState(['activeUser']),
+        
         goTologin() {
             this.$navigateTo(login)
         },
@@ -74,29 +48,22 @@ export default {
             this.$navigateTo(roster)
         },
         onItemTap: function(event) {
-      console.log("You tapped: " + this.$data.items[event.index].text);
+            console.log("You tapped:"); 
+        },
+    },
+    computed:{
+        ...mapState(['activeUser']),
+        rosterList(){
+            return this.activeUser.roster
+        }
     }
-    },
-    watch: {
-      characterName(){
-        console.log('character name changed')
-      }
-    },
-    computed: {
-      message() {
-        return "Blank {N}-Vue app";
-      }
-    },
-  });
+  };
 </script>
 
 <style scoped lang="scss">
-  @import '@nativescript/theme/scss/variables/blue';
 
   // Custom styles
-  .fas {
-    @include colorize($color: accent);
-  }
+  
   .border-bottom {
       border-bottom-width: 1;
       border-bottom-color: white;

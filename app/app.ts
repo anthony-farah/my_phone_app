@@ -2,58 +2,88 @@ import Vue from 'nativescript-vue'
 import VueX from 'vuex'
 import Home from './pages/home.vue'
 
+
 declare let __DEV__: boolean;
 
 // Prints Vue logs when --env.production is *NOT* set while building
 Vue.config.silent = !__DEV__
 Vue.use(VueX)
 
+interface ActiveUser {
+  name:string,
+  team: string,
+  username:string,
+  password:string,
+  roster:Character[]
+}
+
+interface Character {
+  cname:string,
+    attacks: string[],
+    defense:number,
+    strength:number,
+    health:number,
+    src: string
+}
+
 
 const appStore = new VueX.Store({
   state: {
     database:{
-      users:[{
+      users:[
+        {
         name:'herbert',
         username:'herb123',
         password:'123456',
         gold:10,
+        team:'Hysteria',
         roster:[{
           cname:'Boggert',
             attacks:[],
             defense:5,
             strength:7,
             health:50
-        }]
+        }
+      ]
       }]
     },
-    activeUser:{
+    activeUser:<ActiveUser> {
       name:'',
+      team: '',
       username:'',
       password:'',
-      roster:[]
+      roster:[{
+        cname:'test',
+        src:'test.png'
+      }]
     }
   },
   actions:{
+    chooseTeam({state, commit},input){
+        const au = state.activeUser
+        au.team = input
+        commit('updateDataBaseUser',au)
+        commit('setActiveUser',au)
+    },
+    chooseFighter({state, commit},input){
+        const au = state.activeUser
+        au.roster.push(input)
+        commit('updateDataBaseUser',au)
+        commit('setActiveUser',au)
+    },
     createUser({state, commit},input){
       const user = state.database.users.find((user)=>{
-        console.log('looking for users')
         return ( user.username === input.name &&
         user.password === input.password )
       })
       if(!user){
-        console.log('we are in the clear no user found')
         const newUser = {
           name:'herbert',
           username:input.name,
           password:input.password,
+          team:'',
           gold:0,
-          roster:[{
-            cname:'Boggert',
-              attacks:[],
-              defense:5,
-              strength:7,
-              health:50
-          }]
+          roster:[]
         }
         commit('setUserToDataBase',newUser)
         commit('setActiveUser',newUser)
@@ -61,14 +91,11 @@ const appStore = new VueX.Store({
     },
     
     login({state, commit},input){
-      console.log('I am inside of login')
         const user = state.database.users.find((user)=>{
-          console.log('looking for users')
           return ( user.username === input.name &&
           user.password === input.password )
         })
         if(user){
-          console.log('I am a user')
           commit('setActiveUser',user)
           return true
         }
@@ -77,19 +104,19 @@ const appStore = new VueX.Store({
   },
   mutations: {
     setActiveUser(state,input){
-      console.log('setting an active user',input)
       state.activeUser = input
     },
     setUserToDataBase(state,input){
       state.database.users.push(input)
     },
-
-    // decreaseWeapons(state) {
-    //     if(state.weapons > 0) {
-    //             state.weapons--;
-    //             state.engines++;
-    //     }
-    // }
+    updateDataBaseUser(state,input){
+      const st = state.database.users
+      st.find((user)=>{
+        if( user.username === input.name &&
+        user.password === input.password )
+          st[st.indexOf(user)] = input
+      })
+    }
   }
 });
 

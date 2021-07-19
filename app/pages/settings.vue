@@ -1,6 +1,6 @@
 <template>
   <Page>
-<FlexboxLayout backgroundColor="black" flexDirection="column" justifyContent="center" class="full-height"> 
+<FlexboxLayout backgroundImage="https://c4.wallpaperflare.com/wallpaper/733/88/989/dark-black-and-white-abstract-black-background-wallpaper-preview.jpg" flexDirection="column" justifyContent="center" class="full-height"> 
 <StackLayout class="container">
 <Switch checked="true" v-model="itemEnabled" />
 <Label 
@@ -43,9 +43,7 @@ color="rgb(224, 0, 0)"
   @import '@nativescript/theme/scss/variables/blue';
 
   // Custom styles
-  .fas {
-    @include colorize($color: accent);
-  }
+  
   .full-height {
     height: 100%;
   }

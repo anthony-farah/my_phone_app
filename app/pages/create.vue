@@ -1,22 +1,24 @@
 <template>
   <Page>
-    <ActionBar backgroundColor="black" class="action-bar" />
-    <FlexboxLayout backgroundColor="black" flexDirection="column" justifyContent="center" class="full-height"> 
+    <ActionBar backgroundColor="black" />
+    <FlexboxLayout backgroundImage="https://c4.wallpaperflare.com/wallpaper/733/88/989/dark-black-and-white-abstract-black-background-wallpaper-preview.jpg" flexDirection="column" justifyContent="center" class="full-height"> 
     <Label text="CREATE" color="rgb(224, 0, 0)" fontSize="50" fontWeight="bold" class="title" marginLeft="85" marginBottom="100"/>
     <StackLayout class="container">
     <FlexboxLayout alignItems="center" backgroundColor="rgb(116, 116, 116)" class="border-bottom">
+        <Image src="https://img.pngio.com/username-login-icon-png-and-vector-for-free-download-pngtree-username-png-512_512.png" width="35" height="35" class="icon-margin" />
        <textField v-model="usernameInput" backgroundColor="rgb(116, 116, 116)" hint="Create Username" class="form-input" />
     </FlexboxLayout>
 
 <FlexboxLayout alignItems="center" backgroundColor="rgb(116, 116, 116)" class="border-bottom">
-       <textField v-model="passwordInput" backgroundColor="rgb(116, 116, 116)" hint="Create Password" secure="true" class="form-input" />
-    </FlexboxLayout>
+    <Image src="https://img.pngio.com/security-password-2-icon-windows-8-iconset-icons8-password-png-256_256.png" width="35" height="35" class="icon-margin" />
+    <textField v-model="passwordInput" backgroundColor="rgb(116, 116, 116)" hint="Create Password" secure="true" class="form-input" />
+</FlexboxLayout>
 
 <Button text="Create Account" @tap="handleCreate" class="my-button" backgroundColor="rgb(224, 0, 0)" />
 
 <FlexboxLayout alignItems="center" justifyContent="space-between" class="auth-buttons">
-    <Button horizontalAlignment="left" backgroundColor="black" color="rgb(224, 0, 0)" text="Already have Account" @tap="goTologin"/>
-    <Label horizontalAlignment="right" backgroundColor="black" color="rgb(224, 0, 0)" text="Forgot Password" />
+    <Button horizontalAlignment="left" backgroundColor="transparent" color="white" text="Already have Account" @tap="goTologin"/>
+    <Label horizontalAlignment="right" backgroundColor="transparent" color="white" text="Forgot Password" />
 </FlexboxLayout>
       </StackLayout>
 
@@ -59,7 +61,6 @@
         },
         handleCreate() {
             if(this.usernameInput.length > 5 && this.passwordInput.length > 5){
-                console.log('got into handle create')
                 this.createUser({
                     name:this.usernameInput,
                     password:this.passwordInput
@@ -84,9 +85,7 @@
   @import '@nativescript/theme/scss/variables/blue';
 
   // Custom styles
-  .fas {
-    @include colorize($color: accent);
-  }
+  
 
   .info {
     font-size: 20;
@@ -137,6 +136,6 @@
     margin-left: 65;
     margin-right: 34; 
     margin-bottom: 250;
-    font-family:'Fantasy', 'Papyrus';
+    font-family:'Fantasy', 'Copperplate';
   }
 </style>

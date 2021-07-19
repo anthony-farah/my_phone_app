@@ -1,23 +1,25 @@
 <template>
   <Page>
     <ActionBar backgroundColor="black" />
-    <FlexboxLayout backgroundColor="black" flexDirection="column" justifyContent="center" class="full-height"> 
+    <FlexboxLayout backgroundImage="https://c4.wallpaperflare.com/wallpaper/733/88/989/dark-black-and-white-abstract-black-background-wallpaper-preview.jpg" flexDirection="column" justifyContent="center" class="full-height"> 
         <Label text="LOGIN" color="rgb(224, 0, 0)" fontSize="50" fontWeight="bold" class="title" marginLeft="110" marginBottom="100" />
     <StackLayout class="container">
 
     <FlexboxLayout alignItems="center" backgroundColor="rgb(116, 116, 116)" class="border-bottom">
+        <Image src="https://img.pngio.com/username-login-icon-png-and-vector-for-free-download-pngtree-username-png-512_512.png" width="35" height="35" class="icon-margin" />
        <textField v-model="usernameInput" backgroundColor="rgb(116, 116, 116)" color="white" hint="Username" class="form-input" />
     </FlexboxLayout>
 
 <FlexboxLayout alignItems="center" backgroundColor="rgb(116, 116, 116)" class="border-bottom">
+    <Image src="https://img.pngio.com/security-password-2-icon-windows-8-iconset-icons8-password-png-256_256.png" width="35" height="35" class="icon-margin" />
        <textField v-model="passwordInput" backgroundColor="rgb(116, 116, 116)" color="white" hint="Password" secure="true" class="form-input" />
     </FlexboxLayout>
 
 <Button text="Login" @tap="handleLogin" class="my-button" backgroundColor="rgb(224, 0, 0)"/>
 
 <FlexboxLayout alignItems="center" justifyContent="space-between" class="auth-buttons">
-    <Button horizontalAlignment="left" backgroundColor="black" color="rgb(224, 0, 0)" text="Create Account" @tap="goTocreate"/>
-    <Label horizontalAlignment="right" backgroundColor="black" color="rgb(224, 0, 0)" text="Forgot Password" />
+    <Button horizontalAlignment="left" backgroundColor="transparent" color="white" text="Create Account" @tap="goTocreate"/>
+    <Label horizontalAlignment="right" backgroundColor="transparent" color="white" text="Forgot Password" />
 </FlexboxLayout>
       </StackLayout>
 
@@ -27,7 +29,6 @@
 
 <script lang="ts">
   import Vue from "nativescript-vue";
-  import login from '../pages/login.vue';
   import create from '../pages/create.vue';
   import chome from '../pages/chome.vue';
   import {mapActions} from 'vuex'
@@ -54,21 +55,12 @@
         },
         handleLogin() {
             if(this.usernameInput.length > 5 && this.passwordInput.length > 5){
-                console.log('got into handle login')
                 this.login({
                     name:this.usernameInput,
                     password:this.passwordInput
-                }) && this.goTochooseteam()
+                }) && this.goTochome()
             }
         }
-    },
-    watch: {
-      characterName(){
-        console.log('character name changed')
-      },
-      passwordInput(){
-          console.log(this.passwordInput)
-      }
     },
     computed: {
       message() {
@@ -79,12 +71,8 @@
 </script>
 
 <style scoped lang="scss">
-  @import '@nativescript/theme/scss/variables/blue';
-
   // Custom styles
-  .fas {
-    @include colorize($color: accent);
-  }
+  
 
   .border-bottom {
       border-bottom-width: 1;
@@ -100,7 +88,7 @@
     margin-right: 10;
   }
   .my-button {
-      background-color: #4BD5DC;
+      background-color: #c50505;
     color: white;
     font-weight: bold;
     border-radius: 25;
@@ -125,6 +113,6 @@
   .title {
     margin-left: 64;
     margin-right: 34;
-    font-family:'Fantasy', 'Papyrus';
+    font-family:'Fantasy', 'Copperplate';
   }
 </style>
